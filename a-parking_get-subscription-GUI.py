@@ -125,7 +125,7 @@ user_about_btn = sg.Button(button_text='О программе', key='user-about-
 user_quit_btn = sg.Button(button_text='Выход', key='user-quit-btn')
 
 ### ABOUT TEXT ###
-about_text = f'Программа для поиска и оплаты подписок на парковки A-Parking(Almaty).\nДата сборки: {today}\nMMV'
+about_text = f'Программа для поиска и оплаты подписок на парковки A-Parking(Almaty).\n\nДата сборки: 21.06.2022'
 
 ### USER WINDOW LAYOUT ###
 user_layout = [
@@ -148,7 +148,7 @@ while True:
     event, value = user_window.read()
 
     if event in (None, 'user-quit-btn'):
-        logging.warning('Script job interrupted by user, exiting')
+        #logging.warning('Script job interrupted by user, exiting')
         exit()
 
     if event in ('user-about-btn'):
@@ -273,15 +273,14 @@ while True:
                             except:
                                 print('Ошибка, пытаемся повторить запрос...')
                                 user_window.refresh()
-                                logging.exception('Exceptioned:')
+                                #logging.exception('Exceptioned:')
                                 count_request_try += 1
                                 if count_request_try > request_attempts:
                                     request_try = False
                                     print('Превышено количество попыток повторить запрос',
                                           request_attempts, 'прерываем исполнение...')
                                     user_window.refresh()
-                                    logging.error(
-                                        'Request attempts exceeded, attempts exceeded...')
+                                    #logging.error('Request attempts exceeded, attempts exceeded...')
                                     result_list.append(
                                         'ОШИБКА: проверьте подключение и/или настройки прокси!')
                                     show_result()
@@ -289,18 +288,15 @@ while True:
                                     print('Пытаемся получить корректный ответ, попытка',
                                           count_request_try, 'из', request_attempts)
                                     user_window.refresh()
-                                    logging.warning(
-                                        'Exceptioned:, retrying...')
+                                    #logging.warning('Exceptioned:, retrying...')
                                     sleep(2)
-                        logging.info('Logging in status code: ' +
-                                     str(login.status_code))
+                        #logging.info('Logging in status code: ' + str(login.status_code))
 
                         if 'Здравствуйте' not in login.text:
                             print(
                                 'ОШИБКА: при попытке залогиниться, проверьте правильность данных и повторите запуск')
                             user_window.refresh()
-                            logging.error(
-                                'FAILURE: failed to log in, check creds!')
+                            #logging.error('FAILURE: failed to log in, check creds!')
                             result_list.append(
                                 'ОШИБКА: проверьте логин и пароль!')
                             show_result()
@@ -317,8 +313,7 @@ while True:
                         session_cookies = {
                             'nowsess': nowsess_cookie
                         }
-                        logging.info('Nowsess cookie value is: ' +
-                                     str(session_cookies['nowsess']))
+                        #logging.info('Nowsess cookie value is: ' + str(session_cookies['nowsess']))
                     ### TRYING TO LOG IN A-PARKING ###
                     logging_in()
 
@@ -343,15 +338,14 @@ while True:
                             except:
                                 print('Ошибка, пытаемся повторить запрос...')
                                 user_window.refresh()
-                                logging.exception('Exceptioned:')
+                                #logging.exception('Exceptioned:')
                                 count_request_try += 1
                                 if count_request_try > request_attempts:
                                     request_try = False
                                     print('Превышено количество попыток повторить запрос',
                                           request_attempts, 'прерываем исполнение...')
                                     user_window.refresh()
-                                    logging.error(
-                                        'Request attempts exceeded, attempts exceeded...')
+                                    #logging.error('Request attempts exceeded, attempts exceeded...')
                                     result_list.append(
                                         'ОШИБКА: проверьте подключение и/или настройки прокси!')
                                     show_result()
@@ -359,16 +353,14 @@ while True:
                                     print('Пытаемся получить корректный ответ, попытка',
                                           count_request_try, 'из', request_attempts)
                                     user_window.refresh()
-                                    logging.warning(
-                                        'Exceptioned:, retrying...')
+                                    #logging.warning('Exceptioned:, retrying...')
                                     sleep(2)
 
                         if 'subscriptionCost' not in subscriptions.text:
                             print(
                                 'ОШИБКА: не удалось получить список, ошибка сессии, пытаемся перелогиниться')
                             user_window.refresh()
-                            logging.warning(
-                                'SESSION: most propably, session is dead, retrying to login')
+                            #logging.warning('SESSION: most propably, session is dead, retrying to login')
                             count_attempt += 1
                             logging_in()
                             continue
@@ -425,15 +417,14 @@ while True:
                                         print(
                                             'Ошибка, пытаемся повторить запрос...')
                                         user_window.refresh()
-                                        logging.exception('Exceptioned:')
+                                        #logging.exception('Exceptioned:')
                                         count_request_try += 1
                                         if count_request_try > request_attempts:
                                             request_try = False
                                             print('Превышено количество попыток повторить запрос',
                                                   request_attempts, 'прерываем исполнение...')
                                             user_window.refresh()
-                                            logging.error(
-                                                'Request attempts exceeded, attempts exceeded...')
+                                            #logging.error('Request attempts exceeded, attempts exceeded...')
                                             result_list.append(
                                                 'ОШИБКА: проверьте подключение и/или настройки прокси!')
                                             show_result()
@@ -441,16 +432,12 @@ while True:
                                             print('Пытаемся получить корректный ответ, попытка',
                                                   count_request_try, 'из', request_attempts)
                                             user_window.refresh()
-                                            logging.warning(
-                                                'Exceptioned:, retrying...')
+                                            #logging.warning('Exceptioned:, retrying...')
                                             sleep(2)
 
-                                logging.info(
-                                    'Pay Subscription requset headers:\n' + str(pay_subscription.request.body))
-                                logging.info(
-                                    'Pay Subscription status code is: ' + str(pay_subscription.status_code))
-                                logging.info(
-                                    'Pay Subscription requset headers:\n' + str(pay_subscription.request.headers))
+                                #logging.info('Pay Subscription requset headers:\n' + str(pay_subscription.request.body))
+                                #logging.info('Pay Subscription status code is: ' + str(pay_subscription.status_code))
+                                #logging.info('Pay Subscription requset headers:\n' + str(pay_subscription.request.headers))
 
                                 ### CHECKING PAYMENT RESPONSE ###
                                 if 'На вашем счету недостаточно средств' in pay_subscription.text:
@@ -464,8 +451,7 @@ while True:
                                     '''
                                     result_list.append(
                                         'Подписка' + str(count_subscriptions) + '. ' + 'Недостаточно средств на балансе')
-                                    logging.warning(
-                                        'Недостаточно средств на балансе')
+                                    #logging.warning('Недостаточно средств на балансе')
                                     result_list.append(
                                         'ОШИБКА: недостаточно средств на балансе')
                                     show_result()
@@ -483,7 +469,7 @@ while True:
 
                                     result_list.append(
                                         str(count_subscriptions) + '. ' + result)
-                                    logging.info('PAYMENT SUCCESS:\n' + result)
+                                    #logging.info('PAYMENT SUCCESS:\n' + result)
                                     estimated_time()
                                     print('----------------------------\n')
                                     user_window.refresh()
@@ -491,8 +477,7 @@ while True:
                                 else:
                                     print('ОШИБКА: получен неожиданный ответ:', pay_subscription.status_code,
                                           pay_subscription.request.headers, pay_subscription.request.body, sep='\n')
-                                    logging.info(
-                                        'RESPONSE UNSUSPECTED, check response file.')
+                                    #logging.info('RESPONSE UNSUSPECTED, check response file.')
                                     result_list.append(
                                         'ОШИБКА: получен неожиданный ответ:' + pay_subscription.status_code)
                                     show_result()
